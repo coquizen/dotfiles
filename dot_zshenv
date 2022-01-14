@@ -1,0 +1,93 @@
+# Set XDG Base Directory environment
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_RUNTIME_DIR="/var/run/user/$UID"
+
+# Specify number of commands stored in history file
+export SAVEHIST=1000000
+# Specify number of commands loaded into memory
+export HISTSIZE=1000000
+
+# Locally installed binaries
+PATH="$XDG_DATA_HOME/bin:$PATH"
+PATH="$HOME/.local/bin:$PATH"
+
+## Language Environments
+# Haskell via Cabal
+[[ -d "$XDG_DATA_HOME/cabal/bin" ]] && PATH="$XDG_DATA_HOME/cabal/bin:$PATH"
+
+# Add RVM (ruby) for scripting
+[[ -d "$XDG_DATA_HOME/rvm/bin" ]] && PATH="$PATH:$XDG_DATA_HOME/rvm/bin"
+
+# Add Rust binaries
+[[ -d "$XDG_DATA_HOME/rust/cargo/bin" ]] && PATH="$XDG_DATA_HOME/rust/cargo/bin:$PATH"
+
+# Add Nim binaries
+[[ -d "$XDG_DATA_HOME/nimble/bin" ]] && PATH="$PATH:$XDG_DATA_HOME/nimble/bin"
+
+# Add yarn installed global binaries
+[[ -d "$XDG_DATA_HOME/yarn/bin" ]] && PATH="$XDG_DATA_HOME/yarn/bin:$PATH"
+
+# Add rubies
+[[ -d "$XDG_DATA_HOME/gem/ruby/**/bin" ]] && PATH="$XDG_DATA_HOME/gem/ruby/**/bin:$PATH"
+
+# Add perl
+[[ -d "$XDG_DATA_HOME/perl5/bin" ]] && PATH="$XDG_DATA_HOME/perl5/bin:$PATH"
+
+# Add node binaries
+[[ -d "$XDG_DATA_HOME/nvm" ]] && PATH="$XDG_DATA_HOME/nvm/current/bin:$PATH"
+# Node Version Manager
+# For NVM compatibility
+export NVM_SYMLINK_CURRENT=true
+# Change default location for nvm
+export NVM_DIR="$XDG_DATA_HOME/nvm"
+
+# Set an alternative for npm's npmrc to $XDG_CONFIG_HOME
+export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
+
+# Rust environment setup
+export CARGO_HOME="$XDG_DATA_HOME/rust/cargo"
+export RUSTUP_HOME="$XDG_DATA_HOME/rust/multirust"
+
+# Ruby Version Manager
+# This sets up ruby versioning environment
+[[ -s "$XDG_DATA_HOME/rvm" ]] && export RVM_DIR="$XDG_DATA_HOME/rvm"
+[[ -s "$RVM_DIR/rvm/scripts/rvm" ]] && source "$RVM_DIR/rvm/scripts/rvm"
+
+# Set up the Go environment
+export GOPATH="$HOME/Developments/Software/Go"
+export GOBIN="$GOPATH/bin"
+PATH="$GOBIN:$PATH"
+
+# Finally export PATH
+export PATH
+
+
+# Set TERM
+if [[ -v KITTY_WINDOW_ID ]]; then
+	export TERM=xterm-kitty
+else
+	export TERM=xterm-24bit
+fi
+
+# Set the properties file for Jetbrains's products
+export IDEA_PROPERTIES="$XDG_CONFIG_HOME/JetBrains/idea.properties"
+
+# Set the gnupg home
+export GNUPGHOME="$XDG_CONFIG_HOME/gnupg"
+
+
+# Set the vi-mode timeout to be shorter
+export KEYTIMEOUT=1
+
+# Set up tmux to autostart on login if not an embedded terminal;
+# don't forget to inform JetBrains and VSCode to load this environment variable
+if [[ "$EMBEDDED_TERMINAL" = true ]]; then
+	export ZSH_TMUX_AUTOSTART=false
+else
+	export ZSH_TMUX_AUTOSTART=false
+fi
+
+# Define the default editor
+export EDITOR=/usr/bin/nvim
+

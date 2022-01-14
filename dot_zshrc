@@ -1,0 +1,26 @@
+# Use powerline
+USE_POWERLINE="true"
+# Source manjaro-zsh-configuration
+if [[ -e /usr/share/zsh/manjaro-zsh-config ]]; then
+  source /usr/share/zsh/manjaro-zsh-config
+fi
+# Use manjaro zsh prompt
+if [[ -e /usr/share/zsh/manjaro-zsh-prompt ]]; then
+  source /usr/share/zsh/manjaro-zsh-prompt
+fi
+
+###############
+### Aliases ###
+###############
+alias svim='SUDO_EDITOR=nvim sudo -e'
+alias ls='exa -l --git --extended --all --group --header --long'
+alias sls='exa --across'
+alias lsg='exa -G'
+alias grep='grep --color=auto'
+alias mv='mv -i'
+alias rm='rm -i'
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+# alias yarn='yarn --use-yarnrc $XDG_CONFIG_HOME/yarn/yarnrc --emoji true'
+alias msync='rsync -rlptzv --progress --delete --exclude=node_modules'
+alias sshk='kitty +kitten ssh kronos'
+alias hsi='history|grep'
